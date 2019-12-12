@@ -17,12 +17,30 @@ export class ClientesService {
 
   }
 
+  //findAll
   getClientes(): Observable<Cliente[]>{
     return this.http.get<Cliente[]>(this.url);
   }
 
-  createClientes(cliente: Cliente): Observable<Cliente>{
+  //findById
+  GetClientesId(cliente: Cliente): Observable<Cliente>{
+    return this.http.get<Cliente>(this.url+"/"+cliente.id);
+  }
+
+  //save
+  CreateClientes(cliente: Cliente): Observable<Cliente>{
     return this.http.post<Cliente>(this.url, cliente, {headers:this.httpHeaders});
   }
+
+  //update
+  UpdateClientes(cliente: Cliente): Observable<Cliente>{
+    return this.http.put<Cliente>(this.url+"/"+cliente.id, cliente, {headers:this.httpHeaders});
+  }
+
+  //delete
+  /*DeleteClient(cliente: Cliente): Observable<void>{
+    return this.http.delete<void>(this.url, cliente, {headers:this.httpHeaders});
+  }*/
+  
 
 }
