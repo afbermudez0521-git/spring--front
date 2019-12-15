@@ -19,20 +19,35 @@ export class FormComponent implements OnInit {
     ) { }
 
   ngOnInit() {
+    this.getId();
   }
 
   public create():void{
-    this.clientesService.CreateClientes(this.cliente).subscribe((data)=>{
-      this.router.navigate(['/clientes']);
-      swal.fire('Bien', 'Se guardo cliente con exito', 'success');
+
+    swal.fire({
+      title: 'Esta seguro(a)?',
+      text: "Desea crear este cliente!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Aceptar'
+    }).then((result) => {
+      if (result.value) {
+        this.clientesService.CreateClientes(this.cliente).subscribe((data)=>{
+          this.router.navigate(['/clientes']);
+          swal.fire('Bien', 'Se guardó cliente con exito', 'success');
+        });
+      }
     });
+
   }
 
   public getId(): void{
     this.activatedRoute.params.subscribe((params)=>{
-      let id = params['id'];
-      if(id){
-        this.clientesService.GetClientesId(id).subscribe((cliente)=>{
+      this.cliente.id = params['id'];
+      if(this.cliente.id){
+        this.clientesService.GetClientesId(this.cliente).subscribe((cliente)=>{
           this.cliente = cliente;
         });
       }
@@ -40,9 +55,24 @@ export class FormComponent implements OnInit {
   }
 
   public update():void{
-    this.clientesService.UpdateClientes(this.cliente).subscribe((data)=>{
-      
+
+    swal.fire({
+      title: 'Esta seguro(a)?',
+      text: "Desea modificar este cliente!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Aceptar'
+    }).then((result) => {
+      if (result.value) {
+        this.clientesService.UpdateClientes(this.cliente).subscribe((data)=>{
+          this.router.navigate(['/clientes']);
+          swal.fire('Bien', 'Se modificó cliente con exito', 'success');
+        });
+      }
     });
+    
   }
 
   public cancel():void{
