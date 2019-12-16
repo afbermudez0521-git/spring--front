@@ -1,3 +1,8 @@
+<ul class="alert alert-danger" *ngIf="errores?.length > 0">
+    <li *ngFor="let items of errores">
+        {{ items }}
+    </li>
+</ul>
 <div class="card bg-dark text-white m-5">
     <div class="card-header">Crear cliente</div>
     <div class="card-body">
@@ -5,8 +10,8 @@
             <div class="form-group row">
                 <label for="nombre" class="col-sm-2 col-form-label">Nombre</label>
                 <div class="col-sm-6">
-                    <input type="text" class="form-control" name="nombre" [(ngModel)]="cliente.nombre" required minlength="3" #nombre="ngModel">
-                    <div class="alert alert-danger" *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)">
+                    <input type="text" class="form-control" name="nombre" [(ngModel)]="cliente.nombre" #nombre="ngModel">
+                    <!--<div class="alert alert-danger" *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)">
                         <div *ngIf="nombre.errors.required">
                             <div>
                                 Nombre requerido.
@@ -14,17 +19,17 @@
                         </div>
                         <div *ngIf="nombre.errors.minlength">
                             <div>
-                                Maximo 3 caracteres.
+                                Mínimo 3 caracteres.
                             </div>
                         </div>
-                    </div>
+                    </div>-->
                 </div>
             </div>
             <div class="form-group row">
                 <label for="apellido" class="col-sm-2 col-form-label">Apellido</label>
                 <div class="col-sm-6">
-                    <input type="text" class="form-control" name="apellido" [(ngModel)]="cliente.apellido" required minlength="3" #apellido="ngModel">
-                    <div class="alert alert-danger" *ngIf="apellido.invalid && (apellido.dirty || apellido.touched)">
+                    <input type="text" class="form-control" name="apellido" [(ngModel)]="cliente.apellido" #apellido="ngModel">
+                    <!--<div class="alert alert-danger" *ngIf="apellido.invalid && (apellido.dirty || apellido.touched)">
                         <div *ngIf="apellido.errors.required">
                             <div>
                                 Apellido requerido.
@@ -32,17 +37,17 @@
                         </div>
                         <div *ngIf="apellido.errors.minlength">
                             <div>
-                                Maximo 3 caracteres.
+                                Mínimo 3 caracteres.
                             </div>
                         </div>
-                    </div>
+                    </div>-->
                 </div>
             </div>
             <div class="form-group row">
                 <div class="col-sm-2">
-                    <button class="btn btn-primary" (click)="create()" *ngIf="!cliente.id else elseBlock" disabled="!clienteForm.form.valid">Crear</button>
+                    <button class="btn btn-primary" (click)="create()" *ngIf="!cliente.id else elseBlock" [disabled]="!clienteForm.form.valid">Crear</button>
                     <ng-template #elseBlock>
-                        <button class="btn btn-primary" (click)="update()" disabled="!clienteForm.form.valid">Modificar</button>
+                        <button class="btn btn-primary" (click)="update()" [disabled]="!clienteForm.form.valid">Modificar</button>
                     </ng-template>
                 </div>
                 <div class="col-sm-1">

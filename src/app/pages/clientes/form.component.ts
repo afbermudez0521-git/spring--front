@@ -11,6 +11,7 @@ import  swal  from 'sweetalert2';
 export class FormComponent implements OnInit {
 
   private cliente:Cliente = new Cliente();
+  private errores:String[];
 
   constructor(
       private clientesService: ClientesService, 
@@ -37,6 +38,8 @@ export class FormComponent implements OnInit {
         this.clientesService.CreateClientes(this.cliente).subscribe((data)=>{
           this.router.navigate(['/clientes']);
           swal.fire('Bien', 'Se guardó cliente con exito', 'success');
+        },(err)=>{
+          this.errores = err.error.errors as string[];
         });
       }
     });
@@ -69,6 +72,8 @@ export class FormComponent implements OnInit {
         this.clientesService.UpdateClientes(this.cliente).subscribe((data)=>{
           this.router.navigate(['/clientes']);
           swal.fire('Bien', 'Se modificó cliente con exito', 'success');
+        },(err)=>{
+          this.errores = err.error.errors as string[];
         });
       }
     });

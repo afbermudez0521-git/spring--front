@@ -13,6 +13,10 @@ import { DirectivasComponent } from './pages/directivas/directivas.component';
 
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 
+import localeEs from '@angular/common/locales/es';
+import { registerLocaleData } from '@angular/common';
+registerLocaleData(localeEs, 'es');
+
 @NgModule({
   declarations: [
     AppComponent,

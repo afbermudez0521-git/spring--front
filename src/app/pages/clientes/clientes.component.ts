@@ -17,7 +17,7 @@ export class ClientesComponent implements OnInit {
     private clientesService: ClientesService, 
     private router: Router,
     ) {
-      clientesService.getClientes().subscribe((clientes)=>{ 
+      clientesService.getClientesMap().subscribe((clientes)=>{ 
       this.clientes = clientes; 
     },(error)=>{
       console.log("Error en peticion get"+error);
